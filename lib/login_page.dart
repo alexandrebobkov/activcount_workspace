@@ -1,4 +1,5 @@
 import 'package:activcount_workspace/sign_in.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'first_screen.dart';
@@ -12,6 +13,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar (
+        centerTitle: true,
+        title: Text('activcount | Workspace Assistant',
+          style: TextStyle(fontFamily: 'RobotoMono'),
+        ),
+      ),
       body: Container (
         decoration: BoxDecoration(
           image: DecorationImage (
@@ -38,6 +45,22 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.login),
+            label: 'Login',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.account_circle_outlined),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

@@ -67,6 +67,18 @@ class FirstScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.account_circle_outlined),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 
