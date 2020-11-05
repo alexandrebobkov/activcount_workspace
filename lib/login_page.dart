@@ -12,14 +12,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white60,
+      body: Container (
+        decoration: BoxDecoration(
+          image: DecorationImage (
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              BizLogo(),
+              Container (
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration (
+                    image: DecorationImage(image:AssetImage('assets/google_logo.png'),),
+                ),
+              ),
+              //BizLogo(),
               //FlutterLogo(size: 150),
               //SizedBox(height: 60),
               _signInButton(),
@@ -32,8 +44,9 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Widget _signInButton() {
-    return OutlineButton(
+    return FlatButton(
       splashColor: Colors.green,
+      color: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
@@ -48,8 +61,8 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.red),
+      //highlightElevation: 0,
+      //borderSide: BorderSide(color: Colors.red),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
