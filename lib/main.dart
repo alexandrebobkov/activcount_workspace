@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:activcount_workspace/services/auth_service.dart';
+
+import 'first_screen.dart';
 import 'login_page.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
+class WorkspaceAssistant extends StatefulWidget {
+  @override
+  _WorkspaceAssistantState createState() => _WorkspaceAssistantState();
+}
+class _WorkspaceAssistantState extends State<WorkspaceAssistant> with WidgetsBindingObserver {
+    @override
+    void initState() {
+      super.initState();
+      WidgetsBinding.instance.addObserver(this);
+    }
+    @override
+    void dispose() {
+      WidgetsBinding.instance.removeObserver(this);
+      super.dispose();
+    }
+    @override
+    Widget build(BuildContext context) {
+      // TODO: implement build
+      throw UnimplementedError();
+    }
+}
+
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -29,10 +59,66 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: LoginPage(),
+      //home: LoginPage(),
+      //home: MyNavController(),
+      home: App2(),
+      routes: <String, WidgetBuilder> {
+        '/home' : (BuildContext context) => LoginPage(),
+        '/logIn': (BuildContext context) => FirstScreen(),
+      },
     );
   }
 }
+
+class App2 extends StatelessWidget {
+  // Create the initialization Future outside of `build`:
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          // TODO: implement build
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          // TODO: implement build
+          //return LoginPage();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return LoginPage();
+      },
+    );
+  }
+}
+
+class MyNavController extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //final AuthService auth = Provider.of(context).auth;
+    return StreamBuilder<String> (
+      //stream: auth.onAuthStateChanged,
+      builder: (context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final bool signedIn = snapshot.hasData;
+          return signedIn ? LoginPage() : FirstScreen();
+        }
+        return Container();
+      },
+    );
+  }
+
+}
+
+
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

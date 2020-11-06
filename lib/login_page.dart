@@ -13,12 +13,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar (
+      /*appBar: AppBar (
         centerTitle: true,
         title: Text('activcount | Workspace Assistant',
           style: TextStyle(fontFamily: 'RobotoMono'),
         ),
-      ),
+      ),*/
       body: Container (
         decoration: BoxDecoration(
           image: DecorationImage (
