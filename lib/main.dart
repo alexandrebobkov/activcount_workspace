@@ -51,9 +51,180 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Hi Adi!
+// Going to show you my coding in progress.
+// Hope recording works :0
+
+// LOVE YOU! :*
+// K, LET'S GO!
+
+// As I type a code, the virtual Android should change it's display.
+// now will add content.
+
+// k, got the cover image up!
+// texting to you now :)
+
+// IT WORKS!
+// Layout is one I'm gonna use
+// Programm recognizes my clicks
+// Let's add bottom navigation pane
+
+// Next step is to program click behaviours for those 2 navigation button.
+
+// That's it for now :*
+
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return Scaffold (
+      body: Stack (
+        children: <Widget> [
+          Container (
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SingleChildScrollView (
+            child: Column (
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.width*0.20,
+                    left: MediaQuery.of(context).size.width*0.05,
+                    right: MediaQuery.of(context).size.width*0.05,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:0, bottom:0),
+                    child: Card (
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget>[
+                          Padding (
+                            padding: const EdgeInsets.only(top:10, bottom:10, left:20, right:20),
+                            child: Text('Welcome', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.black),),
+                          ),
+                          Padding (
+                            padding: const EdgeInsets.only(top:10, bottom:10, left:20, right:20),
+                            child: Text('You pushed the button this many times:', style: TextStyle(fontSize:16, fontWeight: FontWeight.bold, color: Colors.black),),
+                          ),
+                          Padding (
+                            padding: const EdgeInsets.only(top:10, bottom:10, left:20, right:20),
+                            child: Consumer <Counter> (
+                              builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1,),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          var counter = context.read<Counter>();
+          counter.increment();
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.account_circle_outlined),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
+  }
+}
+  /*@override
+  Widget build(BuildContext context) {
+    return Scaffold (
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration: BoxDecoration (
+              image: DecorationImage (
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+            SingleChildScrollView (
+              child: Column (
+                children: <Widget> [
+                  Container (
+                    decoration: BoxDecoration (
+                      image: DecorationImage (
+                        image: AssetImage('assets/logo.png'),
+                      ),
+                    ),
+                  ),
+                  Container (
+                    width: MediaQuery.of(context).size.width*0.8,
+                    height: MediaQuery.of(context).size.height,
+                    padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.width*0.15
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 0, bottom:0),
+                      child: Card (
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                        child: Column (
+                          children: <Widget> [
+                            Padding (
+                              padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20.0, right: 20.0),
+                              child:
+                              Text ('Welcome', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),),
+                            ),
+                            Padding (
+                              padding: const EdgeInsets.all(5.0),
+                              child:
+                              Text ('You have pushed the button this many times:', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                            ),
+                            Padding (
+                              padding: const EdgeInsets.all(5.0),
+                              //child: _signOutButton(context),
+                            ),
+                            Padding (
+                              padding: const EdgeInsets.all(5.0),
+                              child: Consumer<Counter>(
+                                builder: (context, counter, child) => Text(
+                                  '${counter.value}',
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ) ,
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }*/
+
+  /*Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(title: Text('Flutter Demo Home Page'),),
       body: Container (
@@ -77,6 +248,7 @@ class MyHomePage extends StatelessWidget {
                       color: Colors.white
                   ),
                 ),
+
               ),
               Padding (
                 padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20.0, right: 20.0),
@@ -140,5 +312,4 @@ class MyHomePage extends StatelessWidget {
           ],
       ),
     );
-  }
-}
+  }*/
