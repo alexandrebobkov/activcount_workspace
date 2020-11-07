@@ -29,6 +29,14 @@ class LandingPage extends StatefulWidget {
   @override
   _LandingPage createState() => _LandingPage();
 }
+class Counter with ChangeNotifier {
+  int value = 0;
+
+  void increment() {
+    value += 7;
+    notifyListeners();
+  }
+}
 
 class _LandingPage extends State<LandingPage> {
   int _selectedIndex = 0;
@@ -71,7 +79,7 @@ class _LandingPage extends State<LandingPage> {
               children: <Widget> [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  //height: MediaQuery.of(context).size.height,
                   padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height*0.15,
                     bottom: MediaQuery.of(context).size.height*0.15,
@@ -94,9 +102,7 @@ class _LandingPage extends State<LandingPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(5),
-                            child: Consumer <Counter> (
-                              builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1),
-                            ),
+                            //child: Consumer <Counter> ( builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1),),
                           ),
                         ],
                       ),
@@ -136,14 +142,7 @@ class _LandingPage extends State<LandingPage> {
 //
 // [ChangeNotifier] is a class in `flutter:foundation`. [Counter] does
 // _not_ depend on Provider.
-class Counter with ChangeNotifier {
-  int value = 0;
 
-  void increment() {
-    value += 7;
-    notifyListeners();
-  }
-}
 
 class LoginPage extends StatelessWidget {
   @override
