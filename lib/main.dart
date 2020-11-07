@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'activcount Workdesk Assistant',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -55,50 +55,89 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Demo Home Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('You have pushed the button this many times:'),
+      //appBar: AppBar(title: Text('Flutter Demo Home Page'),),
+      body: Container (
+        decoration: BoxDecoration(
+          image: DecorationImage (
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center (
+          child: Column (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget> [
+              Padding (
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20.0, right: 20.0),
+                child: Text (
+                  'Welcome',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                  ),
+                ),
+              ),
+              Padding (
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20.0, right: 20.0),
+                child: Text (
+                  'You have pushed the button this many times:',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                  ),
+                ),
+              ),
             // Consumer looks for an ancestor Provider widget
             // and retrieves its model (Counter, in this case).
             // Then it uses that model to build widgets, and will trigger
             // rebuilds if the model is updated.
-            Consumer<Counter>(
-              builder: (context, counter, child) => Text(
-                '${counter.value}',
-                style: Theme.of(context).textTheme.headline4,
+              Consumer<Counter>(
+                  builder: (context, counter, child) => Text(
+                    '${counter.value}',
+                    style: Theme.of(context).textTheme.headline1,
+                    ),
               ),
-            ),
-          ],
+              ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // You can access your providers anywhere you have access
-          // to the context. One way is to use Provider<Counter>.of(context).
-          //
-          // The provider package also defines extension methods on context
-          // itself. You can call context.watch<Counter>() in a build method
-          // of any widget to access the current state of Counter, and to ask
-          // Flutter to rebuild your widget anytime Counter changes.
-          //
-          // You can't use context.watch() outside build methods, because that
-          // often leads to subtle bugs. Instead, you should use
-          // context.read<Counter>(), which gets the current state
-          // but doesn't ask Flutter for future rebuilds.
-          //
-          // Since we're in a callback that will be called whenever the user
-          // taps the FloatingActionButton, we are not in the build method here.
-          // We should use context.read().
-          var counter = context.read<Counter>();
-          counter.increment();
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+              // You can access your providers anywhere you have access
+              // to the context. One way is to use Provider<Counter>.of(context).
+              //
+              // The provider package also defines extension methods on context
+              // itself. You can call context.watch<Counter>() in a build method
+              // of any widget to access the current state of Counter, and to ask
+              // Flutter to rebuild your widget anytime Counter changes.
+              //
+              // You can't use context.watch() outside build methods, because that
+              // often leads to subtle bugs. Instead, you should use
+              // context.read<Counter>(), which gets the current state
+              // but doesn't ask Flutter for future rebuilds.
+              //
+              // Since we're in a callback that will be called whenever the user
+              // taps the FloatingActionButton, we are not in the build method here.
+              // We should use context.read().
+              var counter = context.read<Counter>();
+              counter.increment();
+              },
+              tooltip: 'Increment',
+              child: Icon(Icons.add),
+            ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.account_circle_outlined),
+            label: 'Profile',
+            ),
+          ],
       ),
     );
   }
