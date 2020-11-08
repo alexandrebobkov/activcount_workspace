@@ -7,6 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:activcount_workspace/router.dart';
+
 class Destination {
   const Destination(this.title, this.icon, this.color);
   final String title;
@@ -27,18 +29,109 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LandingPage(),
-      /*/initialRoute: '/',
-      routes: {
-        '/': (context) => LandingPage(),
-        '/second': (context) => LoginPage(),
-      },*/
+      home: LandingPage2(),
+      onGenerateRoute: MyRouter().generateRoute,
+      initialRoute: '/',
+    );
+  }
+}
+class LandingPage2 extends StatelessWidget {
+  int _currentIndex = 0;
+
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration: BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:0, bottom:0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top:10, bottom:10),
+                            child: Text('Welcome', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                          ),
+                          Padding (
+                            padding: const EdgeInsets.all(10),
+                            child: Text("You have pressed the button this many times", style: TextStyle(fontSize:16, fontWeight: FontWeight.normal, color: Colors.black),),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            //child: Consumer <Counter> ( builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1),),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //var counter = context.read<Counter>();
+          //counter.increment();
+          //setState(() {mainWidget = LoginPage();});
+
+          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return new LoginPage(); } ));
+          Navigator.pushNamed(context, '/login');
+        },
+        child: Icon (Icons.add),
+      ),
+      bottomNavigationBar: _navTab(context),
+    );
+  }
+  Widget _navTab(BuildContext context) {
+    return BottomNavigationBar (
+      backgroundColor: Colors.white60,
+      selectedItemColor: Colors.green,
+      currentIndex: _currentIndex,
+      onTap: (int index) {
+        if (index == 0) {
+          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LandingPage(); }));
+        }
+        else if (index == 1) {}
+        else if (index == 2) {
+          Navigator.pushNamed(context, '/login');
+          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage2(); }));
+        }
+      },
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
+        BottomNavigationBarItem(icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
+        BottomNavigationBarItem(icon: new Icon(Icons.login_rounded), label: 'LogIn',),
+      ],
     );
   }
 }
 
 // This is the stateful widget that the main application instantiates.
 class LandingPage extends StatefulWidget {
+//class LandingPage extends StatelessWidget {
   LandingPage({Key key, this.destination}) : super(key: key);
   final Destination destination;
 
@@ -140,9 +233,9 @@ class _LandingPage extends State<LandingPage> {
           //var counter = context.read<Counter>();
           //counter.increment();
           //setState(() {mainWidget = LoginPage();});
-          Navigator.of(context).push(MaterialPageRoute<Null> (
-            builder: (BuildContext context) { return new LoginPage(); }
-          ));
+
+          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return new LoginPage(); } ));
+          Navigator.pushNamed(context, '/login');
         },
         child: Icon (Icons.add),
       ),
@@ -160,7 +253,7 @@ class _LandingPage extends State<LandingPage> {
         }
         else if (index == 1) {}
         else if (index == 2) {
-          Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage(); }));
+          Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage2(); }));
         }
       },
       items: <BottomNavigationBarItem>[
@@ -177,7 +270,7 @@ class _LandingPage extends State<LandingPage> {
 // _not_ depend on Provider.
 
 
-class LoginPage extends StatelessWidget {
+class LoginPage2 extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
     return Scaffold(
