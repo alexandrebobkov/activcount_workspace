@@ -7,6 +7,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class Destination {
+  const Destination(this.title, this.icon, this.color);
+  final String title;
+  final IconData icon;
+  final MaterialColor color;
+}
+const List<Destination> allDestinations = <Destination> [
+  Destination('Home', Icons.home, Colors.grey),
+  Destination('Login', Icons.login_outlined, Colors.grey),
+];
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
@@ -18,13 +28,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: LandingPage(),
+      /*/initialRoute: '/',
+      routes: {
+        '/': (context) => LandingPage(),
+        '/second': (context) => LoginPage(),
+      },*/
     );
   }
 }
 
 // This is the stateful widget that the main application instantiates.
 class LandingPage extends StatefulWidget {
-  LandingPage({Key key}) : super(key: key);
+  LandingPage({Key key, this.destination}) : super(key: key);
+  final Destination destination;
 
   @override
   _LandingPage createState() => _LandingPage();
@@ -39,7 +55,14 @@ class Counter with ChangeNotifier {
 }
 
 class _LandingPage extends State<LandingPage> {
-  int _selectedIndex = 0;
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  int _currentIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
@@ -56,9 +79,7 @@ class _LandingPage extends State<LandingPage> {
     ),
   ];
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+
   }
 
   @override
@@ -115,9 +136,13 @@ class _LandingPage extends State<LandingPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          var counter = context.read<Counter>();
-          counter.increment();
+        onPressed: () {
+          //var counter = context.read<Counter>();
+          //counter.increment();
+          //setState(() {mainWidget = LoginPage();});
+          Navigator.of(context).push(MaterialPageRoute<Null> (
+            builder: (BuildContext context) { return new LoginPage(); }
+          ));
         },
         child: Icon (Icons.add),
       ),
@@ -128,9 +153,17 @@ class _LandingPage extends State<LandingPage> {
     return BottomNavigationBar (
       backgroundColor: Colors.white60,
       selectedItemColor: Colors.green,
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      items: [
+      currentIndex: _currentIndex,
+      onTap: (int index) {
+        if (index == 0) {
+          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LandingPage(); }));
+        }
+        else if (index == 1) {}
+        else if (index == 2) {
+          Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage(); }));
+        }
+      },
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
         BottomNavigationBarItem(icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
         BottomNavigationBarItem(icon: new Icon(Icons.login_rounded), label: 'LogIn',),
