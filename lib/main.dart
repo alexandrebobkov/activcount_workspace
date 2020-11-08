@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:activcount_workspace/router.dart';
+import 'package:activcount_workspace/services/nav_pane.dart';
 
 class Destination {
   const Destination(this.title, this.icon, this.color);
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
   }
 }
 class LandingPage2 extends StatelessWidget {
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
+  final navpane = new NavPane();
 
   @override
   Widget build (BuildContext context) {
@@ -102,23 +104,21 @@ class LandingPage2 extends StatelessWidget {
         },
         child: Icon (Icons.add),
       ),
-      bottomNavigationBar: _navTab(context),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
   }
-  Widget _navTab(BuildContext context) {
+  Widget _navTab(BuildContext context, int ind) {
     return BottomNavigationBar (
       backgroundColor: Colors.white60,
       selectedItemColor: Colors.green,
-      currentIndex: _currentIndex,
+      currentIndex: ind,
       onTap: (int index) {
-        if (index == 0) {
-          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LandingPage(); }));
-        }
-        else if (index == 1) {}
-        else if (index == 2) {
+        if (index == 0)
+          Navigator.pushNamed(context, '/');
+        else if (index == 1)
+          Navigator.pushNamed(context, '/profile');
+        else if (index == 2)
           Navigator.pushNamed(context, '/login');
-          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage2(); }));
-        }
       },
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
@@ -271,22 +271,148 @@ class _LandingPage extends State<LandingPage> {
 
 
 class LoginPage2 extends StatelessWidget {
+  final int _currentIndex = 0;
+  final navpane = new NavPane();
+
   @override
   Widget build (BuildContext context) {
     return Scaffold(
+
       body: Stack(
-          children: <Widget> [
-            Container (
-              decoration: BoxDecoration (
-                image: DecorationImage(
-                  image: AssetImage('assets/background.png'),
-                  fit: BoxFit.cover,
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            SingleChildScrollView (),
-            ],
-        ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
   }
+  /*Widget _navTab(BuildContext context, int ind) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white60,
+      selectedItemColor: Colors.green,
+      currentIndex: ind,
+      onTap: (int index) {
+        if (index == 0)
+          Navigator.pushNamed(context, '/');
+        else if (index == 1)
+          Navigator.pushNamed(context, '/profile');
+        else if (index == 2)
+          Navigator.pushNamed(context, '/login');
+      },
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
+      ],
+    );
+  }*/
+}
+
+class Profile2 extends StatelessWidget {
+  final int _currentIndex = 0;
+  final navpane = new NavPane();
+
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Profile', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
+    );
+  }
+  /*Widget _navTab(BuildContext context, int ind) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white60,
+      selectedItemColor: Colors.green,
+      currentIndex: ind,
+      onTap: (int index) {
+        if (index == 0)
+          Navigator.pushNamed(context, '/');
+        else if (index == 1)
+          Navigator.pushNamed(context, '/profile');
+        else if (index == 2)
+          Navigator.pushNamed(context, '/login');
+      },
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.home), label: 'Home',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
+      ],
+    );
+  }*/
 }
