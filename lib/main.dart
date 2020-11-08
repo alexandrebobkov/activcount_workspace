@@ -10,17 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:activcount_workspace/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
 
-class Destination {
-  const Destination(this.title, this.icon, this.color);
-  final String title;
-  final IconData icon;
-  final MaterialColor color;
-}
-const List<Destination> allDestinations = <Destination> [
-  Destination('Home', Icons.home, Colors.grey),
-  Destination('Login', Icons.login_outlined, Colors.grey),
-];
-
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
@@ -107,37 +96,109 @@ class LandingPage2 extends StatelessWidget {
       bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
   }
-  Widget _navTab(BuildContext context, int ind) {
-    return BottomNavigationBar (
-      backgroundColor: Colors.white60,
-      selectedItemColor: Colors.green,
-      currentIndex: ind,
-      onTap: (int index) {
-        if (index == 0)
-          Navigator.pushNamed(context, '/');
-        else if (index == 1)
-          Navigator.pushNamed(context, '/profile');
-        else if (index == 2)
-          Navigator.pushNamed(context, '/login');
-      },
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
-        BottomNavigationBarItem(icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
-        BottomNavigationBarItem(icon: new Icon(Icons.login_rounded), label: 'LogIn',),
-      ],
+}
+
+class LoginPage2 extends StatelessWidget {
+  final int _currentIndex = 0;
+  final navpane = new NavPane();
+
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
   }
 }
 
-// This is the stateful widget that the main application instantiates.
-class LandingPage extends StatefulWidget {
-//class LandingPage extends StatelessWidget {
-  LandingPage({Key key, this.destination}) : super(key: key);
-  final Destination destination;
+class Profile2 extends StatelessWidget {
+  final int _currentIndex = 0;
+  final navpane = new NavPane();
 
   @override
-  _LandingPage createState() => _LandingPage();
+  Widget build (BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Profile', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
+    );
+  }
 }
+
+/*
 class Counter with ChangeNotifier {
   int value = 0;
 
@@ -146,34 +207,6 @@ class Counter with ChangeNotifier {
     notifyListeners();
   }
 }
-
-class _LandingPage extends State<LandingPage> {
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  int _currentIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-  void _onItemTapped(int index) {
-
-  }
 
   @override
   Widget build (BuildContext context) {
@@ -264,155 +297,4 @@ class _LandingPage extends State<LandingPage> {
     );
   }
 }
-// Simplest possible model, with just one field.
-//
-// [ChangeNotifier] is a class in `flutter:foundation`. [Counter] does
-// _not_ depend on Provider.
-
-
-class LoginPage2 extends StatelessWidget {
-  final int _currentIndex = 0;
-  final navpane = new NavPane();
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-
-      body: Stack(
-        children: <Widget> [
-          Container (
-            decoration:
-            BoxDecoration (
-              image: DecorationImage(
-                image: AssetImage('assets/background.png'),
-                fit: BoxFit.cover,),),
-          ),
-          SingleChildScrollView (
-            child: Column(
-              children: <Widget> [
-                Container (
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width*0.10,
-                    right: MediaQuery.of(context).size.width*0.10,
-                  ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      children: <Widget> [
-                        Padding(
-                          padding: const EdgeInsets.only(top:10, bottom:10),
-                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: navpane.navTab(context, _currentIndex),
-    );
-  }
-  /*Widget _navTab(BuildContext context, int ind) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.white60,
-      selectedItemColor: Colors.green,
-      currentIndex: ind,
-      onTap: (int index) {
-        if (index == 0)
-          Navigator.pushNamed(context, '/');
-        else if (index == 1)
-          Navigator.pushNamed(context, '/profile');
-        else if (index == 2)
-          Navigator.pushNamed(context, '/login');
-      },
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
-      ],
-    );
-  }*/
-}
-
-class Profile2 extends StatelessWidget {
-  final int _currentIndex = 0;
-  final navpane = new NavPane();
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-
-      body: Stack(
-        children: <Widget> [
-          Container (
-            decoration:
-            BoxDecoration (
-              image: DecorationImage(
-                image: AssetImage('assets/background.png'),
-                fit: BoxFit.cover,),),
-          ),
-          SingleChildScrollView (
-            child: Column(
-              children: <Widget> [
-                Container (
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width*0.10,
-                    right: MediaQuery.of(context).size.width*0.10,
-                  ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      children: <Widget> [
-                        Padding(
-                          padding: const EdgeInsets.only(top:10, bottom:10),
-                          child: Text('Profile', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: navpane.navTab(context, _currentIndex),
-    );
-  }
-  /*Widget _navTab(BuildContext context, int ind) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.white60,
-      selectedItemColor: Colors.green,
-      currentIndex: ind,
-      onTap: (int index) {
-        if (index == 0)
-          Navigator.pushNamed(context, '/');
-        else if (index == 1)
-          Navigator.pushNamed(context, '/profile');
-        else if (index == 2)
-          Navigator.pushNamed(context, '/login');
-      },
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.home), label: 'Home',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
-      ],
-    );
-  }*/
-}
+*/
