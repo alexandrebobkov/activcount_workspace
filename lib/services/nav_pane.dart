@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NavPane {
+  int navIndex = 0;
+
   Widget navTab(BuildContext context, int _currentIndex) {
     return BottomNavigationBar(
       backgroundColor: Colors.grey[400],

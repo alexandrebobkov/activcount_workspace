@@ -12,6 +12,7 @@ import 'package:activcount_workspace/services/nav_pane.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
+  NavPane np = new NavPane();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class LandingPage2 extends StatelessWidget {
-  final int _currentIndex = 0;
+  final int _currentIndex = 1;
   final navpane = new NavPane();
 
   @override
@@ -70,7 +72,10 @@ class LandingPage2 extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(5),
-                            //child: Consumer <Counter> ( builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1),),
+                            child:
+                            MyCount(),
+                            //Text('${MyScore()._cnt}', style: Theme.of(context).textTheme.headline1),
+                            //Consumer <MyScore> ( builder: (context, score, child) => Text ('${score._cnt}', style: Theme.of(context).textTheme.headline1),),
                           ),
                         ],
                       ),
@@ -87,14 +92,39 @@ class LandingPage2 extends StatelessWidget {
           //var counter = context.read<Counter>();
           //counter.increment();
           //setState(() {mainWidget = LoginPage();});
-
           //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return new LoginPage(); } ));
-          Navigator.pushNamed(context, '/login');
+          //Navigator.pushNamed(context, '/login');
+          //var c = context.read<MyScore>();
+          //c.increase();
         },
         child: Icon (Icons.add),
       ),
       bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
+  }
+}
+class MyScore with ChangeNotifier {
+  int _cnt = 0;
+  void increase() {
+    _cnt++;
+    notifyListeners();
+  }
+  void decrease() {
+    _cnt--;
+    notifyListeners();
+  }
+}
+class MyCount extends StatefulWidget {
+  @override
+  _MyCount createState() => _MyCount();
+}
+class _MyCount extends State<MyCount> {
+  int _count = 19;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text('$_count', style: Theme.of(context).textTheme.headline2);
   }
 }
 
