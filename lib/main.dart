@@ -10,6 +10,14 @@ import 'package:provider/provider.dart';
 import 'package:activcount_workspace/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
 
+/*void main() {
+  runApp(
+    ChangeNotifierProvider (
+      create: (context) => MyScore(),
+        child: MyApp(),
+    ),
+  );
+}*/
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   NavPane np = new NavPane();
@@ -30,6 +38,7 @@ class MyApp extends StatelessWidget {
 class LandingPage2 extends StatelessWidget {
   final int _currentIndex = 1;
   final navpane = new NavPane();
+  final mycount = new MyCount();
 
   @override
   Widget build (BuildContext context) {
@@ -73,9 +82,12 @@ class LandingPage2 extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(5),
                             child:
-                            MyCount(),
+                              /*Consumer<MyScore> (
+                                builder: (context, score, child) => Text('0', style: Theme.of(context).textTheme.headline2,),
+                              ),*/
+                            //MyCount(),
+                            mycount,
                             //Text('${MyScore()._cnt}', style: Theme.of(context).textTheme.headline1),
-                            //Consumer <MyScore> ( builder: (context, score, child) => Text ('${score._cnt}', style: Theme.of(context).textTheme.headline1),),
                           ),
                         ],
                       ),
@@ -120,6 +132,10 @@ class MyCount extends StatefulWidget {
 }
 class _MyCount extends State<MyCount> {
   int _count = 19;
+
+  void _increase() {
+    setState(() {_count++;});
+  }
 
   @override
   Widget build(BuildContext context) {
