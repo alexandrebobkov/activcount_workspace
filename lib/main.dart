@@ -10,17 +10,25 @@ import 'package:provider/provider.dart';
 import 'package:activcount_workspace/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
 
-/*void main() {
+void main() {
   runApp(
-    ChangeNotifierProvider (
-      create: (context) => MyScore(),
-        child: MyApp(),
+    // Provide the model to all widgets within the app. We're using
+    // ChangeNotifierProvider because that's a simple way to rebuild
+    // widgets when a model changes. We could also just use
+    // Provider, but then we would have to listen to Counter ourselves.
+    //
+    // Read Provider's docs to learn about all the available providers.
+    ChangeNotifierProvider(
+      // Initialize the model in the builder. That way, Provider
+      // can own Counter's lifecycle, making sure to call `dispose`
+      // when not needed anymore.
+      create: (context) => Counter(),
+      child: MyApp(),
     ),
   );
-}*/
-void main() => runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
-  NavPane np = new NavPane();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,7 +46,6 @@ class MyApp extends StatelessWidget {
 class LandingPage2 extends StatelessWidget {
   final int _currentIndex = 1;
   final navpane = new NavPane();
-  final mycount = new MyCount();
 
   @override
   Widget build (BuildContext context) {
@@ -79,16 +86,8 @@ class LandingPage2 extends StatelessWidget {
                             padding: const EdgeInsets.all(10),
                             child: Text("You have pressed the button this many times", style: TextStyle(fontSize:16, fontWeight: FontWeight.normal, color: Colors.black),),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child:
-                              /*Consumer<MyScore> (
-                                builder: (context, score, child) => Text('0', style: Theme.of(context).textTheme.headline2,),
-                              ),*/
-                            //MyCount(),
-                            mycount,
-                            //Text('${MyScore()._cnt}', style: Theme.of(context).textTheme.headline1),
-                          ),
+                          Consumer<Counter>(
+                            builder: (context, counter, child) => Text('${counter.value}', style: Theme.of(context).textTheme.headline2,),),
                         ],
                       ),
                     ),
@@ -101,13 +100,8 @@ class LandingPage2 extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //var counter = context.read<Counter>();
-          //counter.increment();
-          //setState(() {mainWidget = LoginPage();});
-          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return new LoginPage(); } ));
-          //Navigator.pushNamed(context, '/login');
-          //var c = context.read<MyScore>();
-          //c.increase();
+          var counter = context.read<Counter>();
+          counter.increment();
         },
         child: Icon (Icons.add),
       ),
@@ -115,37 +109,50 @@ class LandingPage2 extends StatelessWidget {
     );
   }
 }
-class MyScore with ChangeNotifier {
-  int _cnt = 0;
+/*class MyScore with ChangeNotifier {
+  int cnt = 0;
+
   void increase() {
-    _cnt++;
+    cnt++;
     notifyListeners();
   }
   void decrease() {
-    _cnt--;
+    cnt--;
+    notifyListeners();
+  }
+
+}
+*/
+class Counter with ChangeNotifier {
+  int value = 0;
+
+  void increment() {
+    value += 1;
     notifyListeners();
   }
 }
-class MyCount extends StatefulWidget {
-  @override
-  _MyCount createState() => _MyCount();
-}
-class _MyCount extends State<MyCount> {
-  int _count = 19;
 
-  void _increase() {
-    setState(() {_count++;});
-  }
+class CounterState extends State<MyCounter> {
+
+  int cnt = -1;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Text('$_count', style: Theme.of(context).textTheme.headline2);
+
+    return Text('$cnt', style: Theme.of(context).textTheme.headline1);
   }
+
+  void increase() {
+    cnt ++;
+  }
+}
+class MyCounter extends StatefulWidget {
+  @override
+  CounterState createState() => CounterState();
 }
 
 class LoginPage2 extends StatelessWidget {
-  final int _currentIndex = 0;
+  final int currentIndex = 0;
   final navpane = new NavPane();
 
   @override
@@ -189,13 +196,13 @@ class LoginPage2 extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: navpane.navTab(context, _currentIndex),
+      bottomNavigationBar: navpane.navTab(context, currentIndex),
     );
   }
 }
 
 class Profile2 extends StatelessWidget {
-  final int _currentIndex = 0;
+  final int currentIndex = 0;
   final navpane = new NavPane();
 
   @override
@@ -239,108 +246,7 @@ class Profile2 extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: navpane.navTab(context, _currentIndex),
+      bottomNavigationBar: navpane.navTab(context, currentIndex),
     );
   }
 }
-
-/*
-class Counter with ChangeNotifier {
-  int value = 0;
-
-  void increment() {
-    value += 7;
-    notifyListeners();
-  }
-}
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget> [
-          Container (
-            decoration: BoxDecoration (
-              image: DecorationImage(
-                image: AssetImage('assets/background.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SingleChildScrollView (
-            child: Column(
-              children: <Widget> [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width*0.10,
-                    right: MediaQuery.of(context).size.width*0.10,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top:0, bottom:0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top:10, bottom:10),
-                            child: Text('Welcome', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
-                          ),
-                          Padding (
-                            padding: const EdgeInsets.all(10),
-                            child: Text("You have pressed the button this many times", style: TextStyle(fontSize:16, fontWeight: FontWeight.normal, color: Colors.black),),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            //child: Consumer <Counter> ( builder: (context, counter, child) => Text ('${counter.value}', style: Theme.of(context).textTheme.headline1),),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //var counter = context.read<Counter>();
-          //counter.increment();
-          //setState(() {mainWidget = LoginPage();});
-
-          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return new LoginPage(); } ));
-          Navigator.pushNamed(context, '/login');
-        },
-        child: Icon (Icons.add),
-      ),
-        bottomNavigationBar: _navTab(),
-    );
-  }
-  Widget _navTab() {
-    return BottomNavigationBar (
-      backgroundColor: Colors.white60,
-      selectedItemColor: Colors.green,
-      currentIndex: _currentIndex,
-      onTap: (int index) {
-        if (index == 0) {
-          //Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LandingPage(); }));
-        }
-        else if (index == 1) {}
-        else if (index == 2) {
-          Navigator.of(context).push(MaterialPageRoute<Null> (builder: (BuildContext context) { return LoginPage2(); }));
-        }
-      },
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
-        BottomNavigationBarItem(icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
-        BottomNavigationBarItem(icon: new Icon(Icons.login_rounded), label: 'LogIn',),
-      ],
-    );
-  }
-}
-*/
