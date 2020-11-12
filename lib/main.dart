@@ -6,6 +6,9 @@
 
 import 'dart:ui';
 import 'package:activcount_workspace/services/sign_in.dart';
+import 'package:activcount_workspace/src/app.dart';
+import 'package:activcount_workspace/src/views/utils/bottom_nav_panel.dart';
+import 'package:activcount_workspace/src/views/utils/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animations/animations.dart';
@@ -14,7 +17,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'package:activcount_workspace/router.dart';
+//import 'file:///C:/Users/aorus/Documents/GitHub/activcount_workspace/lib/src/views/utils/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
 
 void main() {
@@ -35,9 +38,10 @@ void main() {
   );
 }
 
+
 //void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,9 +60,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
     );
   }
-}
+}*/
 
-class LandingPage2 extends StatelessWidget {
+/*class LandingPage2 extends StatelessWidget {
   final int _currentIndex = 1;
   final navpane = new NavPane();
 
@@ -124,6 +128,7 @@ class LandingPage2 extends StatelessWidget {
     );
   }
 }
+*/
 
 class Counter with ChangeNotifier {
   int value = 0;
@@ -134,7 +139,7 @@ class Counter with ChangeNotifier {
   }
 }
 
-class LoginPage2 extends StatelessWidget {
+/*class LoginPage2 extends StatelessWidget {
   final int currentIndex = 0;
   final navpane = new NavPane();
 
@@ -179,7 +184,7 @@ class LoginPage2 extends StatelessWidget {
             ),
           ),
 
-    ],
+        ],
       ),
       //bottomNavigationBar: navpane.navTab(context, currentIndex),
     );
@@ -204,11 +209,11 @@ class LoginPage2 extends StatelessWidget {
           }
           else {
             Navigator.of(cont).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ProfileError();
-                  },
-                ),
+              MaterialPageRoute(
+                builder: (context) {
+                  return ProfileError();
+                },
+              ),
             );
           }
         });
@@ -239,7 +244,7 @@ class LoginPage2 extends StatelessWidget {
     );
   }
 }
-
+*/
 class Profile2 extends StatelessWidget {
   final int currentIndex = 0;
   final navpane = new NavPane();
@@ -346,50 +351,7 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
   }
 }*/
 
-class BottomNavigationPanel extends StatefulWidget {
-  @override
-  _BottomNavigationPanelState createState() =>
-      _BottomNavigationPanelState();
-}
 
-class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
-  var currentTab = [
-    //Home(),
-    LoginPage2(),
-    //Profile(),
-    Setting(),
-
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    var provider = Provider.of<BottomNavigationPanelProvider>(context);
-    return Scaffold(
-      // Load view with index {currentIndex} from an array currentTab[]
-      body: currentTab[provider.currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: provider.currentIndex,
-        onTap: (index) {
-          provider.currentIndex = index;
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            label: 'Home',
-          ),
-          /*BottomNavigationBarItem(
-            icon: new Icon(Icons.person),
-            label: 'Profile',
-          ),*/
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          )
-        ],
-      ),
-    );
-  }
-}
 
 class Home extends StatelessWidget {
   @override
@@ -410,7 +372,7 @@ class Home extends StatelessWidget {
   }
 }
 
-class Profile extends StatelessWidget {
+/*class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -507,7 +469,7 @@ class ProfileError extends StatelessWidget {
       );
     }// end if
   }
-}
+}*/
 class ProfileLogicProvider with ChangeNotifier {
   // ignore: non_constant_identifier_names
   bool logged_in = false;
@@ -520,7 +482,7 @@ class ProfileLogicProvider with ChangeNotifier {
   }
 }
 
-class Setting extends StatelessWidget {
+/*class Setting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -540,16 +502,6 @@ class Setting extends StatelessWidget {
           )),
     );
   }
-}
+}*/
 
 
-class BottomNavigationPanelProvider with ChangeNotifier {
-  int _currentIndex = 0;
-
-  get currentIndex => _currentIndex;
-
-  set currentIndex(int index) {
-    _currentIndex = index;
-    notifyListeners();
-  }
-}
