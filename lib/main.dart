@@ -192,15 +192,11 @@ class LoginPage2 extends StatelessWidget {
       color: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
-          //var profile_provider = Provider.of<ProfileLogicProvider>(cont);
-
           // if login is successful then load Profile view
           if (result != null) {
-            //profile_provider.loggedIn = true;
             Navigator.of(cont).push(
               MaterialPageRoute(
                 builder: (context) {
-                  //return Setting();
                   return Profile();
                 },
               ),
@@ -210,7 +206,6 @@ class LoginPage2 extends StatelessWidget {
             Navigator.of(cont).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    //return Setting();
                     return ProfileError();
                   },
                 ),
@@ -361,7 +356,7 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
   var currentTab = [
     //Home(),
     LoginPage2(),
-    Profile(),
+    //Profile(),
     Setting(),
 
   ];
@@ -382,10 +377,10 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
             icon: new Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: new Icon(Icons.person),
             label: 'Profile',
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
