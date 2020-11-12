@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 
-class NavPane {
-  int navIndex = 0;
 
-  Widget navTab(BuildContext context, int _currentIndex) {
+class Position with ChangeNotifier {
+  int pos = 0;
+
+  void setPosition( int i) {
+    pos = i;
+    notifyListeners();
+  }
+}
+
+class NavPane {
+  int navIndex = 1;
+
+  Widget navTab(BuildContext cont, int _currentIndex) {
     return BottomNavigationBar(
       backgroundColor: Colors.grey[400],
       selectedItemColor: Colors.white,
-      currentIndex: _currentIndex,
-      onTap: (int i) {
+      currentIndex: navIndex,
+      onTap: (i) {
+
+        //var position = cont.read<Position>();
+        //position.setPosition(i);
+
+        navIndex = i;
+
+
         switch (i) {
-          case 0: Navigator.pushNamed(context, '/'); break;
-          case 1: Navigator.pushNamed(context, '/profile'); break;
-          case 2: Navigator.pushNamed(context, '/login'); break;
+          case 0: Navigator.pushNamed(cont, '/'); break;
+          case 1: Navigator.pushNamed(cont, '/profile'); break;
+          case 2: Navigator.pushNamed(cont, '/login'); break;
         }
       },
 
