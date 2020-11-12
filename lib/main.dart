@@ -140,7 +140,7 @@ class LoginPage2 extends StatelessWidget {
             decoration:
             BoxDecoration (
               image: DecorationImage(
-                image: AssetImage('assets/background.png'),
+                image: AssetImage('assets/patterns/aare.png'),
                 fit: BoxFit.cover,),),
           ),
           SingleChildScrollView (
@@ -190,7 +190,7 @@ class Profile2 extends StatelessWidget {
             decoration:
             BoxDecoration (
               image: DecorationImage(
-                image: AssetImage('assets/background.png'),
+                image: AssetImage('assets/patterns/waiau.png'),
                 fit: BoxFit.cover,),),
           ),
           SingleChildScrollView (
@@ -375,7 +375,7 @@ class Setting extends StatelessWidget {
             decoration:
                 BoxDecoration (
                   image: DecorationImage(
-                    image: AssetImage('assets/background.png'),
+                    image: AssetImage('assets/patterns/waiau.png'),
                   fit: BoxFit.cover,),
                 ),
             alignment: Alignment.center,
