@@ -186,13 +186,17 @@ class LoginPage2 extends StatelessWidget {
   }
 
   Widget _signInButton(BuildContext cont) {
+
     return FlatButton(
       splashColor: Colors.green,
       color: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
+          //var profile_provider = Provider.of<ProfileLogicProvider>(cont);
+
           // if login is successful then load Profile view
           if (result != null) {
+            //profile_provider.loggedIn = true;
             Navigator.of(cont).push(
               MaterialPageRoute(
                 builder: (context) {
@@ -200,6 +204,16 @@ class LoginPage2 extends StatelessWidget {
                   return Profile();
                 },
               ),
+            );
+          }
+          else {
+            Navigator.of(cont).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    //return Setting();
+                    return ProfileError();
+                  },
+                ),
             );
           }
         });
@@ -347,8 +361,8 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
   var currentTab = [
     //Home(),
     LoginPage2(),
+    Profile(),
     Setting(),
-    //Profile(),
 
   ];
 
@@ -368,10 +382,10 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
             icon: new Icon(Icons.home),
             label: 'Home',
           ),
-          /*BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: new Icon(Icons.person),
             label: 'Profile',
-          ),*/
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
@@ -402,28 +416,112 @@ class Home extends StatelessWidget {
 }
 
 class Profile extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center (
-        child: Container (
-          decoration:
-          BoxDecoration (
-            image: DecorationImage(
-              image: AssetImage('assets/graphics/guy_workdesk_01.png'),
-              fit: BoxFit.cover,),
+    bool loggedInStatus = true;
+    // if user is not logged-in, then display simple view
+    if (!loggedInStatus) {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            /*decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),*/
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "Please log-in to access this page.",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            color: Colors.blue,
           ),
-          alignment: Alignment.center,
-          height: 300,
-          width: 300,
-          child: Text(
-            "",
-            style: TextStyle(color: Colors.black, fontSize: 30),
-          ),
-          //color: Colors.blue,
         ),
-      ),
-    );
+      );
+    }
+    else {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            //color: Colors.blue,
+          ),
+        ),
+      );
+    }// end if
+  }
+}
+class ProfileError extends StatelessWidget {
+
+  final bool loggedInStatus = false ;
+  @override
+  Widget build(BuildContext context) {
+    // if user is not logged-in, then display simple view
+    if (!loggedInStatus) {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "Please log-in to access this page.",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            color: Colors.blue,
+          ),
+        ),
+      );
+    }
+    else {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            //color: Colors.blue,
+          ),
+        ),
+      );
+    }// end if
+  }
+}
+class ProfileLogicProvider with ChangeNotifier {
+  // ignore: non_constant_identifier_names
+  bool logged_in = false;
+
+  get loggedStatus => logged_in;
+
+  set loggedIn(bool logged) {
+    logged_in = logged;
+    notifyListeners();
   }
 }
 
