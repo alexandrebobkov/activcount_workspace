@@ -4,9 +4,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:ui';
+import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animations/animations.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:activcount_workspace/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
@@ -38,6 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'activcount Workdesk Assistant',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider<BottomNavigationPanelProvider> (
         child: BottomNavigationPanel(),
@@ -163,6 +170,7 @@ class LoginPage2 extends StatelessWidget {
                           padding: const EdgeInsets.only(top:10, bottom:10),
                           child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
                         ),
+                        _signInButton(context),
                       ],
                     ),
                   ),
@@ -170,9 +178,55 @@ class LoginPage2 extends StatelessWidget {
               ],
             ),
           ),
-        ],
+
+    ],
       ),
       //bottomNavigationBar: navpane.navTab(context, currentIndex),
+    );
+  }
+
+  Widget _signInButton(BuildContext cont) {
+    return FlatButton(
+      splashColor: Colors.green,
+      color: Colors.white,
+      onPressed: () {
+        signInWithGoogle().then((result) {
+          // if login is successful then load Profile view
+          if (result != null) {
+            Navigator.of(cont).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  //return Setting();
+                  return Profile();
+                },
+              ),
+            );
+          }
+        });
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      //highlightElevation: 0,
+      //borderSide: BorderSide(color: Colors.red),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image(image: AssetImage("assets/google_logo.png"), height: 40.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -293,8 +347,9 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
   var currentTab = [
     //Home(),
     LoginPage2(),
-    Profile(),
     Setting(),
+    //Profile(),
+
   ];
 
   @override
@@ -313,10 +368,10 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
             icon: new Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: new Icon(Icons.person),
             label: 'Profile',
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
@@ -350,16 +405,22 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
+      body: Center (
+        child: Container (
+          decoration:
+          BoxDecoration (
+            image: DecorationImage(
+              image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+              fit: BoxFit.cover,),
+          ),
           alignment: Alignment.center,
           height: 300,
           width: 300,
           child: Text(
-            "Profile",
-            style: TextStyle(color: Colors.white, fontSize: 30),
+            "",
+            style: TextStyle(color: Colors.black, fontSize: 30),
           ),
-          color: Colors.blue,
+          //color: Colors.blue,
         ),
       ),
     );
