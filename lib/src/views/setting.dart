@@ -1,5 +1,8 @@
+//import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Setting extends StatelessWidget {
   @override
@@ -14,9 +17,18 @@ class Setting extends StatelessWidget {
                 fit: BoxFit.cover,),
             ),
             alignment: Alignment.center,
-            child: Text(
-              "Settings",
-              style: TextStyle(color: Colors.white, fontSize: 30),
+            child: Text("Settings",
+              style: GoogleFonts.artifika(
+                textStyle: Theme.of(context).textTheme.bodyText1,
+                fontSize: 48,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.normal,
+              ),
+              /*style: TextStyle(
+                color: Colors.green,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),*/
             ),
           )),
     );

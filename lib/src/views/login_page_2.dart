@@ -2,6 +2,7 @@ import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/views/profile.dart';
 import 'package:activcount_workspace/src/views/profile_error.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage2 extends StatelessWidget {
   final int currentIndex = 0;
@@ -37,7 +38,15 @@ class LoginPage2 extends StatelessWidget {
                       children: <Widget> [
                         Padding(
                           padding: const EdgeInsets.only(top:10, bottom:10),
-                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                          child: Text('Log-In',
+                            style: GoogleFonts.artifika(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 48,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
                         ),
                         _signInButton(context),
                       ],
@@ -87,20 +96,26 @@ class LoginPage2 extends StatelessWidget {
       //borderSide: BorderSide(color: Colors.red),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //Image(image: AssetImage("assets/google_logo.png"), height: 40.0),
-            Image(image: AssetImage("assets/graphics/couple_001.png"), height: 40.0),
+            Image(image: AssetImage("assets/graphics/couple_001.png")),
             Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.all(10),
               child: Text(
                 'Sign in with Google',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
+                style: GoogleFonts.jura(
+                  textStyle: Theme.of(cont).textTheme.bodyText1,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                  fontStyle: FontStyle.normal,
                 ),
+                /*style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.green,
+                ),*/
               ),
             )
           ],
