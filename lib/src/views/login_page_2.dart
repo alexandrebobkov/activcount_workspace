@@ -92,8 +92,6 @@ class LoginPage2 extends StatelessWidget {
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      //highlightElevation: 0,
-      //borderSide: BorderSide(color: Colors.red),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Column(
@@ -112,10 +110,6 @@ class LoginPage2 extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
-                /*style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.green,
-                ),*/
               ),
             )
           ],
