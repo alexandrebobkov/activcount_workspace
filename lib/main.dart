@@ -1,120 +1,507 @@
-import 'package:flutter/material.dart';
+// Author: Alexandre Bobkov
 
-import 'login_page.dart';
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'dart:ui';
+import 'package:activcount_workspace/services/sign_in.dart';
+import 'package:activcount_workspace/src/app.dart';
+import 'package:activcount_workspace/src/views/utils/bottom_nav_panel.dart';
+import 'package:activcount_workspace/src/views/utils/router.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:animations/animations.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+//import 'file:///C:/Users/aorus/Documents/GitHub/activcount_workspace/lib/src/views/utils/router.dart';
+import 'package:activcount_workspace/services/nav_pane.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    // Provide the model to all widgets within the app. We're using
+    // ChangeNotifierProvider because that's a simple way to rebuild
+    // widgets when a model changes. We could also just use
+    // Provider, but then we would have to listen to Counter ourselves.
+    //
+    // Read Provider's docs to learn about all the available providers.
+    ChangeNotifierProvider(
+      // Initialize the model in the builder. That way, Provider
+      // can own Counter's lifecycle, making sure to call `dispose`
+      // when not needed anymore.
+      create: (context) => Counter(),
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+
+//void main() => runApp(MyApp());
+
+/*class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'activcount Login',
+      title: 'activcount Workdesk Assistant',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: LoginPage(),
+      home: ChangeNotifierProvider<BottomNavigationPanelProvider> (
+        child: BottomNavigationPanel(),
+        //builder: (BuildContext context) => BottomNavigationPanelProvider(),
+        create: (context) => BottomNavigationPanelProvider(),
+      ),
+      //home: LandingPage2(),
+      onGenerateRoute: MyRouter().generateRoute,
+      initialRoute: '/',
+    );
+  }
+}*/
+
+/*class LandingPage2 extends StatelessWidget {
+  final int _currentIndex = 1;
+  final navpane = new NavPane();
+
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration: BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:0, bottom:0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top:10, bottom:10),
+                            child: Text('Welcome', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                          ),
+                          Padding (
+                            padding: const EdgeInsets.all(10),
+                            child: Text("You have pressed the button this many times", style: TextStyle(fontSize:16, fontWeight: FontWeight.normal, color: Colors.black),),
+                          ),
+                          Consumer<Counter>(
+                            builder: (context, counter, child) => Text('${counter.value}', style: Theme.of(context).textTheme.headline2,),),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          var counter = context.read<Counter>();
+          counter.increment();
+        },
+        child: Icon (Icons.add),
+      ),
+      bottomNavigationBar: navpane.navTab(context, _currentIndex),
     );
   }
 }
+*/
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Counter with ChangeNotifier {
+  int value = 0;
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+  void increment() {
+    value += 1;
+    notifyListeners();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+/*class LoginPage2 extends StatelessWidget {
+  final int currentIndex = 0;
+  final navpane = new NavPane();
 
   @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+  Widget build (BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/patterns/aare.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                        _signInButton(context),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+      //bottomNavigationBar: navpane.navTab(context, currentIndex),
+    );
+  }
+
+  Widget _signInButton(BuildContext cont) {
+
+    return FlatButton(
+      splashColor: Colors.green,
+      color: Colors.white,
+      onPressed: () {
+        signInWithGoogle().then((result) {
+          // if login is successful then load Profile view
+          if (result != null) {
+            Navigator.of(cont).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return Profile();
+                },
+              ),
+            );
+          }
+          else {
+            Navigator.of(cont).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return ProfileError();
+                },
+              ),
+            );
+          }
+        });
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      //highlightElevation: 0,
+      //borderSide: BorderSide(color: Colors.red),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Image(image: AssetImage("assets/google_logo.png"), height: 40.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+*/
+class Profile2 extends StatelessWidget {
+  final int currentIndex = 0;
+  final navpane = new NavPane();
+
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget> [
+          Container (
+            decoration:
+            BoxDecoration (
+              image: DecorationImage(
+                image: AssetImage('assets/patterns/waiau.png'),
+                fit: BoxFit.cover,),),
+          ),
+          SingleChildScrollView (
+            child: Column(
+              children: <Widget> [
+                Container (
+                  width: MediaQuery.of(context).size.width,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height*0.15,
+                    bottom: MediaQuery.of(context).size.height*0.15,
+                    left: MediaQuery.of(context).size.width*0.10,
+                    right: MediaQuery.of(context).size.width*0.10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.only(top:10, bottom:10),
+                          child: Text('Profile', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: navpane.navTab(context, currentIndex),
+    );
+  }
+}
+
+/*enum BottomNavigationType {
+  withLabels,
+  withoutLabels,
+}
+
+class BottomNavigationPanel extends StatefulWidget {
+  const BottomNavigationPanel({Key key, @required this.type}) : super(key: key);
+
+  @override
+  _BottomNavigationPanelState createState() => _BottomNavigationPanelState();
+
+  final BottomNavigationType type;
+}
+
+class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build (BuildContext context) {
+    var bottomNavigationBarItems = <BottomNavigationBarItem> [
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.home_filled),
+        label: "home",
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.account_circle),
+        label: "account",
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.login_outlined),
+        label: "login",
+      ),
+    ];
+    return BottomNavigationBar(
+      backgroundColor: Colors.grey[400],
+      selectedItemColor: Colors.white,
+      currentIndex: _currentIndex,
+      onTap: (i) {
+        switch (i) {
+          case 0: Navigator.pushNamed(context, '/'); break;
+          case 1: Navigator.pushNamed(context, '/profile'); break;
+          case 2: Navigator.pushNamed(context, '/login'); break;
+        }
+      },
+
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
+      ],
+    );
+  }
+}*/
+
+
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Container(
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "Home",
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+            color: Colors.amber,
+          )),
+    );
+  }
+}
+
+/*class Profile extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    bool loggedInStatus = true;
+    // if user is not logged-in, then display simple view
+    if (!loggedInStatus) {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            /*decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),*/
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "Please log-in to access this page.",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            color: Colors.blue,
+          ),
+        ),
+      );
+    }
+    else {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            //color: Colors.blue,
+          ),
+        ),
+      );
+    }// end if
+  }
+}
+class ProfileError extends StatelessWidget {
+
+  final bool loggedInStatus = false ;
+  @override
+  Widget build(BuildContext context) {
+    // if user is not logged-in, then display simple view
+    if (!loggedInStatus) {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "Please log-in to access this page.",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            color: Colors.blue,
+          ),
+        ),
+      );
+    }
+    else {
+      return Scaffold(
+        body: Center(
+          child: Container(
+            decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                fit: BoxFit.cover,),
+            ),
+            alignment: Alignment.center,
+            height: 300,
+            width: 300,
+            child: Text(
+              "",
+              style: TextStyle(color: Colors.black, fontSize: 30),
+            ),
+            //color: Colors.blue,
+          ),
+        ),
+      );
+    }// end if
+  }
+}*/
+class ProfileLogicProvider with ChangeNotifier {
+  // ignore: non_constant_identifier_names
+  bool logged_in = false;
+
+  get loggedStatus => logged_in;
+
+  set loggedIn(bool logged) {
+    logged_in = logged;
+    notifyListeners();
+  }
+}
+
+/*class Setting extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Container (
+            decoration:
+                BoxDecoration (
+                  image: DecorationImage(
+                    image: AssetImage('assets/patterns/waiau.png'),
+                  fit: BoxFit.cover,),
+                ),
+            alignment: Alignment.center,
+            child: Text(
+              "Settings",
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          )),
+    );
+  }
+}*/
+
+
