@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:activcount_workspace/services/sign_in.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
 
@@ -36,6 +38,7 @@ class Profile extends StatelessWidget {
             BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                //image: getProfileImage(),
                 fit: BoxFit.cover,),
             ),
             alignment: Alignment.center,
