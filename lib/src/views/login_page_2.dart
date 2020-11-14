@@ -1,7 +1,6 @@
 import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/views/profile.dart';
 import 'package:activcount_workspace/src/views/profile_error.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,7 +76,6 @@ class LoginPage2 extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) {
                   return Profile();
-                  //return Text("$result");
                 },
               ),
             );
