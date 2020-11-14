@@ -34,6 +34,25 @@ Future<String> signInWithGoogle() async {
   return null;
 }
 
+Future<String> getUserName() async {
+  String userName;
+
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+  final AuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleSignInAuthentication.accessToken,
+    idToken: googleSignInAuthentication.idToken,
+  );
+
+  final UserCredential authResult = await _auth.signInWithCredential(credential);
+  final User user = authResult.user;
+
+  userName = user.displayName.toLowerCase();
+
+  return userName;
+}
+
 Future<void> signOutGoogle() async {
   await googleSignIn.signOut();
 
