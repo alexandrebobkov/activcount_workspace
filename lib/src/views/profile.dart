@@ -1,7 +1,12 @@
 import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/views/login_page_2.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:google_fonts/google_fonts.dart';
+=======
+import 'package:activcount_workspace/services/sign_in.dart';
+import 'package:provider/provider.dart';
+>>>>>>> 878de68e73fda7d158f0201c9f50840d954baad6
 
 class Profile extends StatelessWidget {
 
@@ -40,6 +45,7 @@ class Profile extends StatelessWidget {
       String userName = "Welcome Alex!";
 
       return Scaffold(
+<<<<<<< HEAD
         body: Stack(
           children: <Widget> [
             Container (
@@ -48,6 +54,16 @@ class Profile extends StatelessWidget {
                 image: DecorationImage(
                   image: AssetImage('assets/graphics/guy_workdesk_01.png'),
                   fit: BoxFit.cover,),),
+=======
+        body: Center(
+          child: Container(
+            decoration:
+            BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
+                //image: getProfileImage(),
+                fit: BoxFit.cover,),
+>>>>>>> 878de68e73fda7d158f0201c9f50840d954baad6
             ),
             SingleChildScrollView (
               child: Column(
