@@ -3,6 +3,24 @@ import 'package:activcount_workspace/src/views/login_page_2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class UserProfile extends StatefulWidget {
+
+  final String userName;
+
+  UserProfile({Key key, this.userName});
+
+  @override
+  _UserProfileState createState() => new _UserProfileState();
+}
+class _UserProfileState extends State<UserProfile> {
+  @override
+  Widget build(BuildContext context) {
+    return new Center(
+      child: new Text(widget.userName.toString()),
+    );
+  }
+}
+
 class Profile extends StatelessWidget {
 
   @override
@@ -46,13 +64,13 @@ class Profile extends StatelessWidget {
               child: Column(
                 children: <Widget> [
                   Container (
-                    width: MediaQuery.of(context).size.width,
+                    width: (MediaQuery.of(context).size.width/5)*4,
                     //height: MediaQuery.of(context).size.height,
                     padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height*0.05,
                       bottom: MediaQuery.of(context).size.height*0.05,
-                      left: MediaQuery.of(context).size.width*0.10,
-                      right: MediaQuery.of(context).size.width*0.10,
+                      left: MediaQuery.of(context).size.width/5,
+                      //right: MediaQuery.of(context).size.width*0.10,
                     ),
                     child: Card(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
