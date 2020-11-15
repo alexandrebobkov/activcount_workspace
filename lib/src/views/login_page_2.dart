@@ -24,13 +24,13 @@ class LoginPage2 extends StatelessWidget {
             child: Column(
               children: <Widget> [
                 Container (
-                  width: (MediaQuery.of(context).size.width/3)*2,
+                  width: (MediaQuery.of(context).size.width/3)*3,
                   //height: MediaQuery.of(context).size.height,
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width/3,
-                    //right: MediaQuery.of(context).size.width*0.10,
+                    top: MediaQuery.of(context).size.height/15,
+                    bottom: MediaQuery.of(context).size.height/15,
+                    left: MediaQuery.of(context).size.width/10,
+                    right: MediaQuery.of(context).size.width/10,
                   ),
                   child: Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -72,9 +72,9 @@ class LoginPage2 extends StatelessWidget {
         signInWithGoogle().then((result) {
           // if login is successful then load Profile view
           if (result != null) {
-            // Pass user information
+            // Pass user information to the next view
             Navigator.push(cont, MaterialPageRoute(
-              builder: (cont) => UserProfile(userName: 'Adi & Alex'),
+              builder: (cont) => UserProfile(userName: "Welcome,\n" +result.displayName +"!", user: result),
             ),);
 
             /*// Launch Profile view

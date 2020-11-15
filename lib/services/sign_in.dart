@@ -8,7 +8,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
-Future<String> signInWithGoogle() async {
+//Future<String> signInWithGoogle() async {
+Future<User> signInWithGoogle() async {
   await Firebase.initializeApp();
 
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -21,19 +22,21 @@ Future<String> signInWithGoogle() async {
 
   final UserCredential authResult = await _auth.signInWithCredential(credential);
   final User user = authResult.user;
-  final String user_name = authResult.additionalUserInfo.username;
+
   final Map user_profile = authResult.additionalUserInfo.profile;
 
   if (user != null) {
+    final String user_name = authResult.additionalUserInfo.username;
     assert(!user.isAnonymous);
     assert(await user.getIdToken() != null);
 
     final User currentUser = _auth.currentUser;
     assert(user.uid == currentUser.uid);
 
-    print('signInWithGoogle succeeded: $user');
+    print('signInWithGoogle succeeded!!! \n You are: ' +currentUser.displayName +'\n Detailed info: \n' +currentUser.toString());
 
-    return '$user_name';
+    //return '$user_name';
+    return currentUser;
   }
 
   getProfileImage() {
