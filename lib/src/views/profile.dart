@@ -89,12 +89,12 @@ class _UserProfileState extends State<UserProfile> {
                                   Expanded (child: Center (child: Text(widget.user.email.toLowerCase().toString()),),),
                                 ],
                               ),
-                              Row (
+                              /*Row (
                                 children: <Widget> [
                                   Expanded (child: Center (child: Text("Phone Number:"),),),
                                   Expanded (child: Center (child: Text(widget.user.phoneNumber.toString()),),),
                                 ],
-                              ),
+                              ),*/
                               Row (
                                 children: <Widget> [
                                   Expanded (child: Center (child: Text(""),),),

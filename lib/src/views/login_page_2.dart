@@ -17,7 +17,8 @@ class LoginPage2 extends StatelessWidget {
             decoration:
             BoxDecoration (
               image: DecorationImage(
-                image: AssetImage('assets/patterns/aare.png'),
+                //image: AssetImage('assets/patterns/aare.png'),
+                image: AssetImage('assets/patterns/hinterrhein.png'),
                 fit: BoxFit.cover,),),
           ),
           SingleChildScrollView (
