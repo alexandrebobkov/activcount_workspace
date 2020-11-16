@@ -60,7 +60,7 @@ class LandingPage extends StatelessWidget {
                         // if login is successful then load Profile view
                         if (result != null) {
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => UserProfile(userName: "Welcome,\n" +result.displayName +"!", user: result),),);
+                            builder: (context) => UserProfile(userName: "" +result.displayName +"!", user: result),),);
                         }});
 
                     },

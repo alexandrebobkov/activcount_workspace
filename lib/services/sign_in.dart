@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart' as signIn;
+import 'package:googleapis/drive/v3.dart' as drive;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -14,6 +16,10 @@ Future<User> signInWithGoogle() async {
 
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+  final gDriveSignIn = signIn.GoogleSignIn.standard(scopes: [drive.DriveApi.DriveScope]);
+  final signIn.GoogleSignInAccount account = await gDriveSignIn.signIn();
+  print("GDrive user account: $account");
 
   final AuthCredential credential = GoogleAuthProvider.credential(
     accessToken: googleSignInAuthentication.accessToken,
@@ -71,6 +77,7 @@ Future<String> getUserName() async {
 
 Future<void> signOutGoogle() async {
   await googleSignIn.signOut();
+  //await SignIn.signOut();
 
   print("User Signed Out");
 }

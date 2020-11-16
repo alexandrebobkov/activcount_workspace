@@ -56,7 +56,7 @@ class _UserProfileState extends State<UserProfile> {
                       children: <Widget> [
                         Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Text(widget.userName.toString(),
+                          child: Text("Welcome, " +widget.userName.toString(), textAlign: TextAlign.center,
                             style: GoogleFonts.artifika(
                               textStyle: Theme.of(context).textTheme.bodyText1,
                               fontSize: 24,
@@ -76,25 +76,35 @@ class _UserProfileState extends State<UserProfile> {
                                 ),
                                 child: Image.network(widget.user.photoURL),
                               ),
-
-                              Row (
-                                children: <Widget> [
-                                  Expanded (child: Center (child: Text("User name:"),),),
-                                  Expanded (child: Center (child: Text(widget.user.displayName),),),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Row (
+                                  children: <Widget> [
+                                    Expanded (child: Text("User name:", textAlign: TextAlign.left, style: GoogleFonts.jura(fontWeight: FontWeight.bold,)),),
+                                    Expanded (child: Text(widget.user.displayName, textAlign: TextAlign.left, style: GoogleFonts.jura()),),
+                                  ],
+                                ),
                               ),
-                              Row (
-                                children: <Widget> [
-                                  Expanded (child: Center (child: Text("E-mail:"),),),
-                                  Expanded (child: Center (child: Text(widget.user.email.toLowerCase().toString()),),),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Row (
+                                  children: <Widget> [
+                                    Expanded (child: Text("E-mail:", textAlign: TextAlign.left, style: GoogleFonts.jura(fontWeight: FontWeight.bold,)),),
+                                    Expanded (child: Text(widget.user.email.toLowerCase().toString(), textAlign: TextAlign.left, style: GoogleFonts.jura()),),
+                                  ],
+                                ),
                               ),
-                              /*Row (
-                                children: <Widget> [
-                                  Expanded (child: Center (child: Text("Phone Number:"),),),
-                                  Expanded (child: Center (child: Text(widget.user.phoneNumber.toString()),),),
-                                ],
-                              ),*/
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Text("NOTE: To operate properly this app requires access to your GDive in order to save working documents.",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.jura(
+                                  textStyle: Theme.of(context).textTheme.bodyText2,
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  //fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,),),
+                              ),
                               Row (
                                 children: <Widget> [
                                   Expanded (child: Center (child: Text(""),),),
@@ -228,7 +238,6 @@ class Profile extends StatelessWidget {
                       child: Column(
                         children: <Widget> [
                           Padding(
-
                             padding: const EdgeInsets.all(10),
                             child: Text(userName,
                               style: GoogleFonts.artifika(
