@@ -9,7 +9,7 @@ class Position with ChangeNotifier {
     notifyListeners();
   }
 }
-
+/*
 class NavPane {
   int navIndex = 1;
 
@@ -42,4 +42,4 @@ class NavPane {
       ],
     );
   }
-}
+}*/

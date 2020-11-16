@@ -11,7 +11,8 @@ class MyRouter {
     // TODO: add routing
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => LoginPage2());
+        //return MaterialPageRoute(builder: (_) => LoginPage2());
+        return MaterialPageRoute(builder: (_) => LandingPage());
       case '/profile':
         return MaterialPageRoute(builder: (_) => Setting());
       case '/login':

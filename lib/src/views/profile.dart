@@ -135,7 +135,8 @@ class _UserProfileState extends State<UserProfile> {
           Navigator.of(cont).push(
             MaterialPageRoute(
               builder: (context) {
-                return LoginPage2();
+                //return LoginPage2();
+                return LandingPage();
               },
             ),
           );
@@ -261,13 +262,14 @@ class Profile extends StatelessWidget {
   Widget _signOutButton(BuildContext cont) {
     return FlatButton(
       splashColor: Colors.green,
-      color: Colors.green[300],
+      //color: Colors.green[300],
       onPressed: () {
         signOutGoogle().then((result) {
           Navigator.of(cont).push(
             MaterialPageRoute(
               builder: (context) {
-                return LoginPage2();
+                //return LoginPage2();
+                return LandingPage();
               },
             ),
           );

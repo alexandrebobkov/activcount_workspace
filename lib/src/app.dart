@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         child: BottomNavigationPanel(),
         create: (context) => BottomNavigationPanelProvider(),
       ),
-      onGenerateRoute: MyRouter().generateRoute,
-      initialRoute: '/',
+      //onGenerateRoute: MyRouter().generateRoute,
+      //initialRoute: '/',
     );
   }
 }

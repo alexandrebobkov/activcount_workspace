@@ -13,7 +13,8 @@ class BottomNavigationPanel extends StatefulWidget {
 class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
   var currentTab = [
     //Home(),
-    LoginPage2(),
+    LandingPage(),
+    //LoginPage2(),
     //Profile(),
     Setting(),
   ];

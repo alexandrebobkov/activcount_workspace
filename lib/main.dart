@@ -37,7 +37,7 @@ class Counter with ChangeNotifier {
   }
 }
 
-class Profile2 extends StatelessWidget {
+/*class Profile2 extends StatelessWidget {
   final int currentIndex = 0;
   final navpane = new NavPane();
 
@@ -116,4 +116,4 @@ class ProfileLogicProvider with ChangeNotifier {
     logged_in = logged;
     notifyListeners();
   }
-}
+}*/
