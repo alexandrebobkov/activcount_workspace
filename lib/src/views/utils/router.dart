@@ -1,4 +1,3 @@
-//import 'file:///C:/Users/aorus/Documents/GitHub/activcount_workspace/lib/src/views/utils/routing_values.dart';
 import 'package:activcount_workspace/main.dart';
 //import 'package:activcount_workspace/pages/LandingPage.dart';
 //import 'package:activcount_workspace/pages/HomePage.dart';
@@ -12,7 +11,8 @@ class MyRouter {
     // TODO: add routing
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => LoginPage2());
+        //return MaterialPageRoute(builder: (_) => LoginPage2());
+        return MaterialPageRoute(builder: (_) => LandingPage());
       case '/profile':
         return MaterialPageRoute(builder: (_) => Setting());
       case '/login':

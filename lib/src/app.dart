@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'activcount Workdesk Assistant',
+      title: 'activcount | Your Workdesk Assistant',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         child: BottomNavigationPanel(),
         create: (context) => BottomNavigationPanelProvider(),
       ),
-      onGenerateRoute: MyRouter().generateRoute,
-      initialRoute: '/',
+      //onGenerateRoute: MyRouter().generateRoute,
+      //initialRoute: '/',
     );
   }
 }

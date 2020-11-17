@@ -17,118 +17,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-//import 'file:///C:/Users/aorus/Documents/GitHub/activcount_workspace/lib/src/views/utils/router.dart';
 import 'package:activcount_workspace/services/nav_pane.dart';
 
 void main() {
-  runApp(
-    // Provide the model to all widgets within the app. We're using
-    // ChangeNotifierProvider because that's a simple way to rebuild
-    // widgets when a model changes. We could also just use
-    // Provider, but then we would have to listen to Counter ourselves.
-    //
-    // Read Provider's docs to learn about all the available providers.
-    ChangeNotifierProvider(
-      // Initialize the model in the builder. That way, Provider
-      // can own Counter's lifecycle, making sure to call `dispose`
-      // when not needed anymore.
+  runApp (
+    ChangeNotifierProvider (
       create: (context) => Counter(),
       child: MyApp(),
     ),
   );
 }
-
-
-//void main() => runApp(MyApp());
-
-/*class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'activcount Workdesk Assistant',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: ChangeNotifierProvider<BottomNavigationPanelProvider> (
-        child: BottomNavigationPanel(),
-        //builder: (BuildContext context) => BottomNavigationPanelProvider(),
-        create: (context) => BottomNavigationPanelProvider(),
-      ),
-      //home: LandingPage2(),
-      onGenerateRoute: MyRouter().generateRoute,
-      initialRoute: '/',
-    );
-  }
-}*/
-
-/*class LandingPage2 extends StatelessWidget {
-  final int _currentIndex = 1;
-  final navpane = new NavPane();
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget> [
-          Container (
-            decoration: BoxDecoration (
-              image: DecorationImage(
-                image: AssetImage('assets/background.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SingleChildScrollView (
-            child: Column(
-              children: <Widget> [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width*0.10,
-                    right: MediaQuery.of(context).size.width*0.10,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top:0, bottom:0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        children: <Widget> [
-                          Padding(
-                            padding: const EdgeInsets.only(top:10, bottom:10),
-                            child: Text('Welcome', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
-                          ),
-                          Padding (
-                            padding: const EdgeInsets.all(10),
-                            child: Text("You have pressed the button this many times", style: TextStyle(fontSize:16, fontWeight: FontWeight.normal, color: Colors.black),),
-                          ),
-                          Consumer<Counter>(
-                            builder: (context, counter, child) => Text('${counter.value}', style: Theme.of(context).textTheme.headline2,),),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          var counter = context.read<Counter>();
-          counter.increment();
-        },
-        child: Icon (Icons.add),
-      ),
-      bottomNavigationBar: navpane.navTab(context, _currentIndex),
-    );
-  }
-}
-*/
 
 class Counter with ChangeNotifier {
   int value = 0;
@@ -139,113 +37,7 @@ class Counter with ChangeNotifier {
   }
 }
 
-/*class LoginPage2 extends StatelessWidget {
-  final int currentIndex = 0;
-  final navpane = new NavPane();
-
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget> [
-          Container (
-            decoration:
-            BoxDecoration (
-              image: DecorationImage(
-                image: AssetImage('assets/patterns/aare.png'),
-                fit: BoxFit.cover,),),
-          ),
-          SingleChildScrollView (
-            child: Column(
-              children: <Widget> [
-                Container (
-                  width: MediaQuery.of(context).size.width,
-                  //height: MediaQuery.of(context).size.height,
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height*0.15,
-                    bottom: MediaQuery.of(context).size.height*0.15,
-                    left: MediaQuery.of(context).size.width*0.10,
-                    right: MediaQuery.of(context).size.width*0.10,
-                  ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      children: <Widget> [
-                        Padding(
-                          padding: const EdgeInsets.only(top:10, bottom:10),
-                          child: Text('Log-In', style: TextStyle(fontSize:25, fontWeight: FontWeight.bold, color: Colors.blue),),
-                        ),
-                        _signInButton(context),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-        ],
-      ),
-      //bottomNavigationBar: navpane.navTab(context, currentIndex),
-    );
-  }
-
-  Widget _signInButton(BuildContext cont) {
-
-    return FlatButton(
-      splashColor: Colors.green,
-      color: Colors.white,
-      onPressed: () {
-        signInWithGoogle().then((result) {
-          // if login is successful then load Profile view
-          if (result != null) {
-            Navigator.of(cont).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return Profile();
-                },
-              ),
-            );
-          }
-          else {
-            Navigator.of(cont).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return ProfileError();
-                },
-              ),
-            );
-          }
-        });
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      //highlightElevation: 0,
-      //borderSide: BorderSide(color: Colors.red),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 40.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Sign in with Google',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-*/
-class Profile2 extends StatelessWidget {
+/*class Profile2 extends StatelessWidget {
   final int currentIndex = 0;
   final navpane = new NavPane();
 
@@ -295,64 +87,6 @@ class Profile2 extends StatelessWidget {
   }
 }
 
-/*enum BottomNavigationType {
-  withLabels,
-  withoutLabels,
-}
-
-class BottomNavigationPanel extends StatefulWidget {
-  const BottomNavigationPanel({Key key, @required this.type}) : super(key: key);
-
-  @override
-  _BottomNavigationPanelState createState() => _BottomNavigationPanelState();
-
-  final BottomNavigationType type;
-}
-
-class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
-  int _currentIndex = 0;
-
-  @override
-  Widget build (BuildContext context) {
-    var bottomNavigationBarItems = <BottomNavigationBarItem> [
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.home_filled),
-        label: "home",
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.account_circle),
-        label: "account",
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.login_outlined),
-        label: "login",
-      ),
-    ];
-    return BottomNavigationBar(
-      backgroundColor: Colors.grey[400],
-      selectedItemColor: Colors.white,
-      currentIndex: _currentIndex,
-      onTap: (i) {
-        switch (i) {
-          case 0: Navigator.pushNamed(context, '/'); break;
-          case 1: Navigator.pushNamed(context, '/profile'); break;
-          case 2: Navigator.pushNamed(context, '/login'); break;
-        }
-      },
-
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.account_circle_outlined), label: 'Profile',),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.login_rounded), label: 'LogIn',),
-      ],
-    );
-  }
-}*/
-
-
-
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -372,104 +106,6 @@ class Home extends StatelessWidget {
   }
 }
 
-/*class Profile extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    bool loggedInStatus = true;
-    // if user is not logged-in, then display simple view
-    if (!loggedInStatus) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            /*decoration:
-            BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
-                fit: BoxFit.cover,),
-            ),*/
-            alignment: Alignment.center,
-            height: 300,
-            width: 300,
-            child: Text(
-              "Please log-in to access this page.",
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            color: Colors.blue,
-          ),
-        ),
-      );
-    }
-    else {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            decoration:
-            BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
-                fit: BoxFit.cover,),
-            ),
-            alignment: Alignment.center,
-            height: 300,
-            width: 300,
-            child: Text(
-              "",
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            //color: Colors.blue,
-          ),
-        ),
-      );
-    }// end if
-  }
-}
-class ProfileError extends StatelessWidget {
-
-  final bool loggedInStatus = false ;
-  @override
-  Widget build(BuildContext context) {
-    // if user is not logged-in, then display simple view
-    if (!loggedInStatus) {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            alignment: Alignment.center,
-            height: 300,
-            width: 300,
-            child: Text(
-              "Please log-in to access this page.",
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            color: Colors.blue,
-          ),
-        ),
-      );
-    }
-    else {
-      return Scaffold(
-        body: Center(
-          child: Container(
-            decoration:
-            BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/graphics/guy_workdesk_01.png'),
-                fit: BoxFit.cover,),
-            ),
-            alignment: Alignment.center,
-            height: 300,
-            width: 300,
-            child: Text(
-              "",
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            //color: Colors.blue,
-          ),
-        ),
-      );
-    }// end if
-  }
-}*/
 class ProfileLogicProvider with ChangeNotifier {
   // ignore: non_constant_identifier_names
   bool logged_in = false;
@@ -480,28 +116,4 @@ class ProfileLogicProvider with ChangeNotifier {
     logged_in = logged;
     notifyListeners();
   }
-}
-
-/*class Setting extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: Container (
-            decoration:
-                BoxDecoration (
-                  image: DecorationImage(
-                    image: AssetImage('assets/patterns/waiau.png'),
-                  fit: BoxFit.cover,),
-                ),
-            alignment: Alignment.center,
-            child: Text(
-              "Settings",
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          )),
-    );
-  }
 }*/
-
-

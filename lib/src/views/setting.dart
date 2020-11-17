@@ -24,11 +24,6 @@ class Setting extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 fontStyle: FontStyle.normal,
               ),
-              /*style: TextStyle(
-                color: Colors.green,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),*/
             ),
           )),
     );
