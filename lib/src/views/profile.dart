@@ -98,9 +98,9 @@ class _UserProfileState extends State<UserProfile> {
                                 padding: const EdgeInsets.all(10),
                                 child: Text("NOTE: To operate properly this app requires access to your GDive in order to save working documents.",
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.jura(
+                                style: GoogleFonts.comfortaa(
                                   textStyle: Theme.of(context).textTheme.bodyText2,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Colors.black,
                                   //fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,),),
@@ -128,6 +128,11 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
                 ),
+
+                FloatingActionButton(
+                  onPressed: () {  },
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                  child: Icon(Icons.camera_alt),),
               ],
             ),
           ),

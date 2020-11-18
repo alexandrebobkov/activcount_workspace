@@ -39,7 +39,14 @@ class LandingPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text('Welcome!',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+                  //style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.comfortaa(
+                      textStyle: Theme.of(context).textTheme.bodyText1,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    ),
+                  ),
                   Image(
                     image: AssetImage("assets/graphics/couple_001.png"),
                     height: MediaQuery.of(context).size.height/3,
