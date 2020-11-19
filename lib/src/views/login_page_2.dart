@@ -18,11 +18,21 @@ class LandingPage extends StatelessWidget {
         children: <Widget>[
           Container (
             decoration:
-            BoxDecoration (
+              BoxDecoration(
+                gradient: LinearGradient (
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.blueAccent,
+                    Colors.indigo,
+                    Colors.blueAccent,
+                  ],
+                ),
+              ),
+            /*BoxDecoration (
               image: const DecorationImage(
                 image: AssetImage('assets/patterns/aare.png'),
-                //image: AssetImage('assets/patterns/hinterrhein.png'),
-                fit: BoxFit.cover,),),
+                fit: BoxFit.cover,),),*/
           ),
           Align(
             alignment: Alignment.center,
