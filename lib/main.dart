@@ -8,7 +8,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:camera/camera.dart';
+//import 'package:camera/camera.dart';
 
 import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/app.dart';
@@ -24,16 +24,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:activcount_workspace/services/nav_pane.dart';
 
-Future<void> main() async {
-  // Ensure that plugin services are initialized so that `availableCameras()`
-  // can be called before `runApp()`
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
+void main() {
 
   runApp (
     ChangeNotifierProvider (

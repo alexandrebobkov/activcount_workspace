@@ -1,12 +1,12 @@
 import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/views/login_page_2.dart';
 import 'package:activcount_workspace/src/views/website.dart';
-import 'package:camera/camera.dart';
+//import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'doc_snap.dart';
+//import 'doc_snap.dart';
 
 class UserProfile extends StatefulWidget {
 
