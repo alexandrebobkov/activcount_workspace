@@ -1,8 +1,12 @@
 import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/views/login_page_2.dart';
+import 'package:activcount_workspace/src/views/website.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'doc_snap.dart';
 
 class UserProfile extends StatefulWidget {
 
@@ -13,6 +17,7 @@ class UserProfile extends StatefulWidget {
 
   @override
   _UserProfileState createState() => new _UserProfileState();
+
 }
 class _UserProfileState extends State<UserProfile> {
   /*@override
@@ -130,7 +135,29 @@ class _UserProfileState extends State<UserProfile> {
                 ),
 
                 FloatingActionButton(
-                  onPressed: () {  },
+                  onPressed: () async {
+
+                    /*WidgetsFlutterBinding.ensureInitialized();
+                    // Obtain a list of the available cameras on the device.
+                    final cameras = await availableCameras();
+                    final firstCamera = cameras.first;
+                    return TakePictureScreen(camera: firstCamera);*/
+
+                    /*
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LandingPage();
+                          },
+                        ),
+                    );*/
+
+                    Navigator.of(context).push(
+                        MaterialPageRoute<Null>(builder: (BuildContext context) {
+                          return new WebSiteView(url: "https://www.activcount.ca");
+                        }));
+
+                  },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                   child: Icon(Icons.camera_alt),),
               ],

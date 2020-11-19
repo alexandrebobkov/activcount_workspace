@@ -31,6 +31,12 @@ dependencies:
   googleapis: any
   provider: any
   animations: any
+  http: any
+  dio: any
+  shared_preferences: any
+  flare_flutter: any
+  flutter_webview_plugin: any
+  webview_flutter: any
 
   camera: any
   path_provider: any
