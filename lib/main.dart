@@ -14,6 +14,7 @@ import 'package:activcount_workspace/services/sign_in.dart';
 import 'package:activcount_workspace/src/app.dart';
 import 'package:activcount_workspace/src/views/utils/bottom_nav_panel.dart';
 import 'package:activcount_workspace/src/views/utils/router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animations/animations.dart';
@@ -26,12 +27,35 @@ import 'package:activcount_workspace/services/nav_pane.dart';
 
 void main() {
 
-  runApp (
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
+
+  runApp(MaterialApp(
+    title: 'activcount',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      appBarTheme: AppBarTheme(
+        elevation: 0,
+        color: ThemeData.light().canvasColor,
+      ),
+      primarySwatch: Colors.green,
+    ),
+    home: ChangeNotifierProvider (
+      create: (context) => Counter(),
+      child: MyApp(),
+    ),
+  ));
+
+  /*runApp (
+    //title: "activcount",
+    //debugShowCheckedModeBanner: false,
     ChangeNotifierProvider (
       create: (context) => Counter(),
       child: MyApp(),
     ),
-  );
+  );*/
 }
 
 class Counter with ChangeNotifier {

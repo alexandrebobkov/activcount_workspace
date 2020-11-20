@@ -25,7 +25,6 @@ class LandingPage extends StatelessWidget {
                   colors: [
                     Colors.blueAccent,
                     Colors.indigo,
-                    Colors.blueAccent,
                   ],
                 ),
               ),

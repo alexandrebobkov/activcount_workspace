@@ -154,12 +154,12 @@ class _UserProfileState extends State<UserProfile> {
 
                     Navigator.of(context).push(
                         MaterialPageRoute<Null>(builder: (BuildContext context) {
-                          return new WebSiteView(url: "https://www.activcount.ca");
+                          return new WebSiteView(url: "https://app.activcount.ca/home");
                         }));
 
                   },
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                  child: Icon(Icons.camera_alt),),
+                  child: Icon(Icons.web_outlined),),
               ],
             ),
           ),

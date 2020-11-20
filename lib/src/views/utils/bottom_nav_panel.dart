@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../website.dart';
+
 class BottomNavigationPanel extends StatefulWidget {
   @override
   _BottomNavigationPanelState createState() =>
@@ -16,6 +18,7 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
     LandingPage(),
     //LoginPage2(),
     //Profile(),
+    WebSiteView(url: "https://mobile.activcount.ca"),
     Setting(),
   ];
 
@@ -36,6 +39,10 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.circle),
+            label: 'Web',
           ),
           /*BottomNavigationBarItem(
             icon: new Icon(Icons.person),
