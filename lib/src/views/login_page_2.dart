@@ -38,7 +38,7 @@ class LandingPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text('Welcome!',
+                  Text('Welcome, Adi!',
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
                   Image(
                     image: AssetImage("assets/graphics/couple_001.png"),

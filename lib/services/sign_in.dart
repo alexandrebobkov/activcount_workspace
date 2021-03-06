@@ -17,9 +17,9 @@ Future<User> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
-  final gDriveSignIn = signIn.GoogleSignIn.standard(scopes: [drive.DriveApi.DriveScope]);
+  /*final gDriveSignIn = signIn.GoogleSignIn.standard(scopes: [drive.DriveApi.DriveScope]);
   final signIn.GoogleSignInAccount account = await gDriveSignIn.signIn();
-  print("GDrive user account: $account");
+  print("GDrive user account: $account");*/
 
   final AuthCredential credential = GoogleAuthProvider.credential(
     accessToken: googleSignInAuthentication.accessToken,
