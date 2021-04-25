@@ -41,6 +41,7 @@ class _UserProfileState extends State<UserProfile> {
           SingleChildScrollView (
             child: Column(
               children: <Widget> [
+                // Display Card with user information
                 Container (
                   width: (MediaQuery.of(context).size.width/5)*5,
                   //height: MediaQuery.of(context).size.height,
@@ -56,10 +57,10 @@ class _UserProfileState extends State<UserProfile> {
                       children: <Widget> [
                         Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Text("Welcome, " +widget.userName.toString(), textAlign: TextAlign.center,
+                          child: Text("Hello " +widget.userName.toString(), textAlign: TextAlign.center,
                             style: GoogleFonts.artifika(
                               textStyle: Theme.of(context).textTheme.bodyText1,
-                              fontSize: 24,
+                              fontSize: 22,
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,),
@@ -97,13 +98,13 @@ class _UserProfileState extends State<UserProfile> {
                               Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Text("NOTE: To operate properly this app requires access to your GDive in order to save working documents.",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.jura(
-                                  textStyle: Theme.of(context).textTheme.bodyText2,
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  //fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,),),
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.jura(
+                                    textStyle: Theme.of(context).textTheme.bodyText2,
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    //fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,),),
                               ),
                               Row (
                                 children: <Widget> [
@@ -122,6 +123,77 @@ class _UserProfileState extends State<UserProfile> {
                               borderRadius: BorderRadius.circular(30),
                             ),*/
                             child: _signOutButton(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // display Card with secondary information
+                Container (
+                  width: (MediaQuery.of(context).size.width/5)*5,
+                  //height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height/15,
+                    bottom: MediaQuery.of(context).size.height/15,
+                    left: MediaQuery.of(context).size.width/15,
+                    right: MediaQuery.of(context).size.width/10,
+                  ),
+                  child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                      children: <Widget> [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text("Card #2", textAlign: TextAlign.center,
+                            style: GoogleFonts.artifika(
+                              textStyle: Theme.of(context).textTheme.bodyText1,
+                              fontSize: 22,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.normal,),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Column (
+                            children: <Widget> [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Row (
+                                  children: <Widget> [
+                                    Expanded (child: Text("User name:", textAlign: TextAlign.left, style: GoogleFonts.jura(fontWeight: FontWeight.bold,)),),
+                                    Expanded (child: Text(widget.user.displayName, textAlign: TextAlign.left, style: GoogleFonts.jura()),),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Row (
+                                  children: <Widget> [
+                                    Expanded (child: Text("E-mail:", textAlign: TextAlign.left, style: GoogleFonts.jura(fontWeight: FontWeight.bold,)),),
+                                    Expanded (child: Text(widget.user.email.toLowerCase().toString(), textAlign: TextAlign.left, style: GoogleFonts.jura()),),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Text("NOTE: To operate properly this app requires access to your GDive in order to save working documents.",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.jura(
+                                    textStyle: Theme.of(context).textTheme.bodyText2,
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    //fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,),),
+                              ),
+                              Row (
+                                children: <Widget> [
+                                  Expanded (child: Center (child: Text(""),),),
+                                  Expanded (child: Center (child: Text(""),),),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
