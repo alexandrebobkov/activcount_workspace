@@ -23,10 +23,11 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 #  provider: ^4.3.2+2
 #  animations: any
 
-version: 1.0.0+9
+version: 1.0.0+15
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+#  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.7.0"
 
 dependencies:
   flutter:
