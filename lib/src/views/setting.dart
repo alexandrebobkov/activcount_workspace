@@ -1,13 +1,21 @@
 //import 'dart:html';
 
+//import 'dart:async';
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Setting extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WebView(
+      initialUrl: 'https://www.activcount.ca',
+    );
+    /*return Scaffold(
       body: Center(
           child: Container (
             decoration:
@@ -26,6 +34,6 @@ class Setting extends StatelessWidget {
               ),
             ),
           )),
-    );
+    );*/
   }
 }
