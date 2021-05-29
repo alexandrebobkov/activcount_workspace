@@ -43,7 +43,7 @@ class _BottomNavigationPanelState extends State<BottomNavigationPanel> {
           ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: 'Web',
           )
         ],
       ),

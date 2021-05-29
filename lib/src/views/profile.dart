@@ -99,7 +99,7 @@ class _UserProfileState extends State<UserProfile> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Text("NOTE: To operate properly this app requires access to your GDive in order to save working documents.",
+                                child: Text("...",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.jura(
                                     textStyle: Theme.of(context).textTheme.bodyText2,

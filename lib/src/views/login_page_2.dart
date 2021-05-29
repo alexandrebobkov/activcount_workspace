@@ -78,8 +78,15 @@ class LandingPage extends StatelessWidget {
                   child: FlatButton(
                     child: Text('Sign Up', style: TextStyle(fontSize: 20, color: Colors.green)),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => Setting()),);
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                //return LoginPage2();
+                                return Setting();
+                              },
+                            ),
+                        /*Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => Setting()),*/);
                     }
                     ),
                 ),
