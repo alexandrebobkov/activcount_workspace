@@ -23,7 +23,7 @@ void main() {
   runApp (
     ChangeNotifierProvider (
       create: (context) => Counter(),
-      child: MyApp(),
+      child: MyApp(), // app.dart
     ),
   );
 }
