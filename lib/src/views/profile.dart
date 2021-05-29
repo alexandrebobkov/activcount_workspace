@@ -1,4 +1,5 @@
 import 'package:activcount_workspace/services/sign_in.dart';
+import 'package:activcount_workspace/src/app.dart';
 import 'package:activcount_workspace/src/views/login_page_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,8 @@ class _UserProfileState extends State<UserProfile> {
                             style: GoogleFonts.artifika(
                               textStyle: Theme.of(context).textTheme.bodyText1,
                               fontSize: 22,
-                              color: Colors.blue,
+                              //color: Colors.blue,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.normal,),
                           ),
@@ -211,17 +213,21 @@ class _UserProfileState extends State<UserProfile> {
   Widget _signOutButton(BuildContext cont) {
     return FlatButton(
       splashColor: Colors.green,
-      color: Colors.green[300],
+      //color: Colors.green[300],
+      color: Theme.of(context).buttonColor,
       onPressed: () {
         signOutGoogle().then((result) {
-          Navigator.of(cont).push(
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => MyApp(),
+          ),);
+          /*Navigator.of(cont).push(
             MaterialPageRoute(
               builder: (context) {
                 //return LoginPage2();
                 return LandingPage();
               },
             ),
-          );
+          );*/
         });
       },
 
@@ -238,9 +244,9 @@ class _UserProfileState extends State<UserProfile> {
                 child: Text(
                   'Sign Out',
                   style: GoogleFonts.jura(
-                    textStyle: Theme.of(cont).textTheme.bodyText1,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
+                    textStyle: Theme.of(context).textTheme.bodyText1,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.normal,
                   ),
                 ),

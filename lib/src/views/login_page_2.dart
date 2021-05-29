@@ -38,8 +38,8 @@ class LandingPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text('Welcome, Adi!',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+                  Text('Welcome',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.red),),
                   Image(
                     image: AssetImage("assets/graphics/couple_001.png"),
                     height: MediaQuery.of(context).size.height/3,

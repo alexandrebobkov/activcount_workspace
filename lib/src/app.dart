@@ -1,4 +1,7 @@
 
+/*
+MyApp()
+ */
 import 'package:activcount_workspace/src/views/login_page_2.dart';
 import 'package:activcount_workspace/src/views/utils/router.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +17,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'activcount | Your Workdesk Assistant',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        primaryColor: Colors.green,
+        accentColor: Colors.red,
+        cardColor: Colors.white,
+        buttonColor: Colors.deepOrange,
+        fontFamily: 'jura',
+        /*colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.green,
+        ).copyWith(secondary: Colors.red,),*/
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider<BottomNavigationPanelProvider> (
