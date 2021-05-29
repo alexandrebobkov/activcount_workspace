@@ -12,8 +12,10 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: 'https://www.activcount.ca',
+    return Scaffold(
+        body: WebView(
+      initialUrl: 'https://mobile.activcount.ca',
+      javascriptMode: JavascriptMode.unrestricted,)
     );
     /*return Scaffold(
       body: Center(
